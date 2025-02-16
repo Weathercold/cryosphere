@@ -1,0 +1,7 @@
+.cache/
+.direnv/
+@girs/
+bin/
+node_modules/
+
+result

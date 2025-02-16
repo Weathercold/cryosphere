@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/cryosphere.iml" filepath="$PROJECT_DIR$/.idea/cryosphere.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.direnv/flake-inputs/0sxsfzswhjck7f4sbsvznz285s4i7y64-source/pkgs/development/development.iml" filepath="$PROJECT_DIR$/.direnv/flake-inputs/0sxsfzswhjck7f4sbsvznz285s4i7y64-source/pkgs/development/development.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.direnv/flake-inputs/0sxsfzswhjck7f4sbsvznz285s4i7y64-source/nixos/nixos.iml" filepath="$PROJECT_DIR$/.direnv/flake-inputs/0sxsfzswhjck7f4sbsvznz285s4i7y64-source/nixos/nixos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.direnv/flake-inputs/0sxsfzswhjck7f4sbsvznz285s4i7y64-source/pkgs/pkgs-lib/pkgs-lib.iml" filepath="$PROJECT_DIR$/.direnv/flake-inputs/0sxsfzswhjck7f4sbsvznz285s4i7y64-source/pkgs/pkgs-lib/pkgs-lib.iml" />
+    </modules>
+  </component>
+</project>
