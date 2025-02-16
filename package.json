@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
+        "dev": "npm run build && ags run --gtk4 -d bin/cryosphere",
         "build": "rm -r bin/*; npx squint-cljs compile"
     },
     "devDependencies": {

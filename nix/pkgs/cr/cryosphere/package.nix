@@ -1,8 +1,8 @@
 {
   pkgs,
+  agsPackages,
   agsLib,
   buildNpmPackage,
-  ags,
 }:
 
 let
@@ -31,7 +31,16 @@ agsLib.bundle {
   gtk4 = true;
 
   # Additional libraries and executables to add to gjs' runtime
-  extraPackages = [
-    ags.packages.battery
+  extraPackages = with agsPackages; [
+    apps
+    battery
+    bluetooth
+    cava
+    hyprland
+    mpris
+    network
+    notifd
+    tray
+    wireplumber
   ];
 }

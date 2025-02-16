@@ -45,7 +45,7 @@
           packages = rec {
             default = cryosphere;
             cryosphere = pkgs.callPackage ./nix/pkgs/cr/cryosphere/package.nix {
-              inherit (inputs') ags;
+              agsPackages = inputs'.ags.packages;
               agsLib = ags.lib;
             };
 
@@ -72,7 +72,7 @@
                   runtimeInputs = [ inputs'.clj-nix.packages.deps-lock ];
                   text = ''
                     cd nix/pkgs/do/dots
-                    deps-lock --deps-include ${inputs.dots}/deps.edn
+                    deps-lock --deps-include "${inputs.dots}/deps.edn"
                   '';
                 })
               ];
