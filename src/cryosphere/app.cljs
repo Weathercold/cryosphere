@@ -4,4 +4,4 @@
             ["../../assets/style.scss$default" :as style]))
 
 (.start App {:css style
-             :main (fn [] (map Bar (App.get_monitors)))})
+             :main (fn [] (seq (map Bar (App.get_monitors))))})
