@@ -44,18 +44,9 @@
         {
           packages = rec {
             default = cryosphere;
-            src = pkgs.callPackage ./nix/pkgs/cr/cryosphere/package.nix { };
-            cryosphere = ags.lib.bundle {
-              inherit pkgs;
-              src = pkgs.callPackage ./nix/pkgs/cr/cryosphere/package.nix { };
-              name = "cryosphere";
-              entry = "./app.jsx";
-              gtk4 = true;
-
-              # Additional libraries and executables to add to gjs' runtime
-              extraPackages = with pkgs; [
-                inputs'.ags.packages.battery
-              ];
+            cryosphere = pkgs.callPackage ./nix/pkgs/cr/cryosphere/package.nix {
+              inherit (inputs') ags;
+              agsLib = ags.lib;
             };
 
             dots = pkgs.callPackage ./nix/pkgs/do/dots/package.nix {
