@@ -1,3 +1,0 @@
-{:paths ["src"]
- :output-dir "bin"
- :extension ".jsx"}

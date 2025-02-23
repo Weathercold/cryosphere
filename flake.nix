@@ -7,19 +7,10 @@
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dots = {
-      # url = "github:ferdinand-beyer/dots";
-      url = "github:SughiY/dots";
-      flake = false;
-    };
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-    clj-nix = {
-      url = "github:jlesquembre/clj-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -46,13 +37,12 @@
             default = cryosphere;
             cryosphere = pkgs.callPackage ./nix/pkgs/cr/cryosphere/package.nix {
               agsPackages = inputs'.ags.packages;
-              agsLib = ags.lib;
+              inherit astal-py;
             };
-
-            dots = pkgs.callPackage ./nix/pkgs/do/dots/package.nix {
-              inherit (inputs'.clj-nix.packages) mk-deps-cache;
-              src = inputs.dots;
+            astal-py = pkgs.callPackage ./nix/pkgs/as/astal-py/package.nix {
+              inherit gengir;
             };
+            gengir = pkgs.callPackage ./nix/pkgs/ge/gengir/package.nix { };
           };
 
           formatter = pkgs.nixfmt-rfc-style;
@@ -60,23 +50,18 @@
           devShells = rec {
             default = cryosphere;
             cryosphere = pkgs.mkShell {
-              buildInputs = with pkgs; [
-                # Include all Astal libraries
-                inputs'.ags.packages.agsFull
-                self'.packages.dots
-                nil
-                nixfmt-rfc-style
-                nodejs
-                nodemon
-                (pkgs.writeShellApplication {
-                  name = "dots-deps-lock";
-                  runtimeInputs = [ inputs'.clj-nix.packages.deps-lock ];
-                  text = ''
-                    cd nix/pkgs/do/dots
-                    deps-lock --deps-include "${inputs.dots}/deps.edn"
-                  '';
-                })
-              ];
+              buildInputs =
+                with pkgs;
+                with python313Packages;
+                [
+                  # Include all Astal libraries
+                  inputs'.ags.packages.agsFull
+                  self'.packages.astal-py
+                  hy
+                  nil
+                  nixfmt-rfc-style
+                  python313
+                ];
             };
           };
         };
