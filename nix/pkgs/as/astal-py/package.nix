@@ -1,11 +1,10 @@
 {
   lib,
   fetchFromGitHub,
-  python313Packages,
+  python3Packages,
   gengir,
-  gobject-introspection,
 }:
-python313Packages.buildPythonPackage rec {
+python3Packages.buildPythonPackage rec {
   pname = "astal-py";
   version = "0.1.0";
   pyproject = true;
@@ -18,9 +17,9 @@ python313Packages.buildPythonPackage rec {
   };
   sourceRoot = "${src.name}/lang/python";
 
-  build-system = with python313Packages; [ poetry-core ];
+  build-system = with python3Packages; [ poetry-core ];
 
-  dependencies = with python313Packages; [
+  dependencies = with python3Packages; [
     gengir
     pygobject3
   ];

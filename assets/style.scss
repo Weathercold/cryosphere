@@ -2,19 +2,19 @@
 $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 
-window.Bar {
+#bar {
 	background: transparent;
 	color: $fg-color;
 	font-weight: bold;
 
-	> root {
-		background: $bg-color;
+	#root {
 		border-radius: 10px;
-		margin: 8px;
+		margin: 10px;
 	}
 
-	island {
-		border-radius: 100%;
+	.island {
+		background: $bg-color;
+		border-radius: 100px;
 	}
 
 	button {

@@ -1,0 +1,134 @@
+; This is the Calva REPL Window.
+; It's just a file, really, with some special treatment from Calva.
+; Use it as a REPL input prompt if you like. (When the REPL is connected.)
+; TIPS: The keyboard shortcut `ctrl+alt+o r` shows and focuses this window
+; Please see https://calva.io/repl-window/ for more info.
+; Happy coding! ♥️
+
+; TIPS: As with any Clojure file when the REPL is connected:
+; - `alt+enter` evaluates the current top level form.
+; - `ctrl+enter` evaluates the current form.
+; Special for this file:
+; - `alt+up` and `alt+down` traverse up and down the REPL command history
+;    when the cursor is after the last contents at the prompt
+;
+; See also the Calva Inspector: https://calva.io/inspector/
+
+PLEASE NOTE
+We will update the default location of this file.
+The new default location will be
+  "<projectRootPath>/.calva/repl.calva-repl"
+For now the legacy path is used by default.
+To give yourself a smooth transition, you can opt in
+to the change, by configuring this setting as false:
+  "calva.useLegacyReplWindowPath"
+and then add "**/.calva/repl.calva-repl" to your ".gitignore" file.
+
+
+This file is configured as the output destination for all REPL output.
+You can configure this with the setting:
+  "calva.outputDestinations"
+; Hooking up nREPL sessions ...
+; Connected session: clj
+; Evaluating code from settings: 'calva.autoEvaluateCode.onConnect.clj'
+; Traceback (most recent call last):
+;   File "/nix/store/xk1crgljil8qvp7q8ars29y467lx068b-python3-3.12.9-env/lib/python3.12/site-packages/HyREPL/ops/eval.hy", line 93, in run
+;     (.write p (str (hy-repr (hy.eval self.expr
+;                              ^^^^^^^^^^^^^^^^^
+;   File "<string>", line 1, in <module>
+; NameError: name 'when_let' is not defined
+clj꞉user꞉> 
+; Creating cljs repl session...
+; Connecting cljs repl: ClojureScript nREPL Server...
+; Connected session: cljs
+; TIPS: You can choose which REPL to use (clj or cljs):
+;    *Calva: Toggle REPL connection*
+;    (There is a button in the status bar for this)
+; Error while connecting cljs REPL: NameError
+"calva.outputDestinations"
+clj꞉user꞉> 
+"calva.outputDestinations"
+clj꞉user꞉> (reload-css)
+; Traceback (most recent call last):
+;   File "/nix/store/xk1crgljil8qvp7q8ars29y467lx068b-python3-3.12.9-env/lib/python3.12/site-packages/HyREPL/ops/eval.hy", line 93, in run
+;     (.write p (str (hy-repr (hy.eval self.expr
+;                              ^^^^^^^^^^^^^^^^^
+;   File "<string>", line 1, in <module>
+; NameError: name 'reload_css' is not defined
+clj꞉user꞉> (print "hey")
+; hey
+None
+clj꞉user꞉> ls-sessions
+; Traceback (most recent call last):
+;   File "/nix/store/xk1crgljil8qvp7q8ars29y467lx068b-python3-3.12.9-env/lib/python3.12/site-packages/HyREPL/ops/eval.hy", line 93, in run
+;     (.write p (str (hy-repr (hy.eval self.expr
+;                              ^^^^^^^^^^^^^^^^^
+;   File "<string>", line 1, in <module>
+; NameError: name 'ls_sessions' is not defined
+clj꞉user꞉> (ls-sessions)
+; Traceback (most recent call last):
+;   File "/nix/store/xk1crgljil8qvp7q8ars29y467lx068b-python3-3.12.9-env/lib/python3.12/site-packages/HyREPL/ops/eval.hy", line 93, in run
+;     (.write p (str (hy-repr (hy.eval self.expr
+;                              ^^^^^^^^^^^^^^^^^
+;   File "<string>", line 1, in <module>
+; NameError: name 'ls_sessions' is not defined
+clj꞉user꞉> :ls-sessions
+:ls-sessions
+clj꞉user꞉> :Ls-sessions
+:Ls-sessions
+clj꞉user꞉> :Require
+:Require
+clj꞉user꞉> :Require[!]
+; Traceback (most recent call last):
+;   File "/nix/store/xk1crgljil8qvp7q8ars29y467lx068b-python3-3.12.9-env/lib/python3.12/site-packages/HyREPL/ops/eval.hy", line 93, in run
+;     (.write p (str (hy-repr (hy.eval self.expr
+;                              ^^^^^^^^^^^^^^^^^
+;   File "<string>", line 1, in <module>
+; NameError: name 'hyx_Xexclamation_markX' is not defined
+clj꞉user꞉> (import main)
+; Traceback (most recent call last):
+;   File "/nix/store/xk1crgljil8qvp7q8ars29y467lx068b-python3-3.12.9-env/lib/python3.12/site-packages/HyREPL/ops/eval.hy", line 93, in run
+;     (.write p (str (hy-repr (hy.eval self.expr
+;                              ^^^^^^^^^^^^^^^^^
+;   File "<string>", line 1, in <module>
+; ModuleNotFoundError: No module named 'main'
+clj꞉user꞉> (import .widgets.bar)
+; Traceback (most recent call last):
+;   File "/nix/store/xk1crgljil8qvp7q8ars29y467lx068b-python3-3.12.9-env/lib/python3.12/site-packages/HyREPL/ops/eval.hy", line 93, in run
+;     (.write p (str (hy-repr (hy.eval self.expr
+;                              ^^^^^^^^^^^^^^^^^
+;   File "<string>", line 1, in <module>
+; ModuleNotFoundError: No module named 'widgets'
+clj꞉user꞉> (import .src.main)
+; Traceback (most recent call last):
+;   File "/nix/store/xk1crgljil8qvp7q8ars29y467lx068b-python3-3.12.9-env/lib/python3.12/site-packages/HyREPL/ops/eval.hy", line 93, in run
+;     (.write p (str (hy-repr (hy.eval self.expr
+;                              ^^^^^^^^^^^^^^^^^
+;   File "<string>", line 1, in <module>
+;   File "/home/weathercold/src/cryosphere/src/main.hy", line 16, in <module>
+;     (let [s (repl.start-server)]
+;              ^^^^^^^^^^^^^^^^^^
+;   File "/nix/store/xk1crgljil8qvp7q8ars29y467lx068b-python3-3.12.9-env/lib/python3.12/site-packages/HyREPL/server.hy", line 63, in start_server
+;     (let [s (ReplServer #(ip port) ReplRequestHandler)
+;              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+;   File "/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/socketserver.py", line 457, in __init__
+;     self.server_bind()
+;   File "/nix/store/26yi95240650jxp5dj78xzch70i1kzlz-python3-3.12.9/lib/python3.12/socketserver.py", line 478, in server_bind
+;     self.socket.bind(self.server_address)
+; OSError: [Errno 98] Address already in use
+clj꞉user꞉> (import .src.widgets.bar)
+None
+clj꞉user꞉> Bar
+
+; Traceback (most recent call last):
+;   File "/nix/store/xk1crgljil8qvp7q8ars29y467lx068b-python3-3.12.9-env/lib/python3.12/site-packages/HyREPL/ops/eval.hy", line 93, in run
+;     (.write p (str (hy-repr (hy.eval self.expr
+;                              ^^^^^^^^^^^^^^^^^
+;   File "<string>", line 1, in <module>
+; NameError: name 'Bar' is not defined
+clj꞉user꞉> src.widgets.bar.Bar
+<function Bar at 0x7113fa1a8b80>
+clj꞉user꞉> (.get src.widgets.bar.*time)
+"Tue Feb 25 05:13:13 AM UTC 2025"
+clj꞉user꞉> 
+; nREPL Connection was closed

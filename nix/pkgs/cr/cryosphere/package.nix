@@ -1,17 +1,17 @@
 {
   astalPackages,
-  python313Packages,
+  python3Packages,
   astal-py,
   gobject-introspection,
 }:
-python313Packages.buildPythonApplication {
+python3Packages.buildPythonApplication {
   pname = "cryosphere";
   version = "unstable-0.0.1";
   pyproject = true;
 
   src = ../../../../.;
 
-  dependencies = with python313Packages; [
+  dependencies = with python3Packages; [
     astal-py
     hy
   ];
