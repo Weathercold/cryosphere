@@ -1,5 +1,10 @@
+.cache/
+.calva/
 .direnv/
+.sass-cache/
 .venv/
 __pycache__/
+bin/
+node_modules/
 
 result

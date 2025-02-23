@@ -37,6 +37,7 @@
               inherit gengir;
             };
             gengir = pkgs.callPackage ./nix/pkgs/ge/gengir/package.nix { };
+            hyrepl = pkgs.callPackage ./nix/pkgs/hy/hyrepl/package.nix { };
             hyuga = pkgs.callPackage ./nix/pkgs/hy/hyuga/package.nix { };
           };
 
@@ -46,19 +47,21 @@
             default = cryosphere;
             cryosphere =
               let
-                python = pkgs.python313.withPackages (
+                python = pkgs.python3.withPackages (
                   pythonPackages: with pythonPackages; [
                     self'.packages.astal-py
                     hy
+                    self'.packages.hyrepl
+                    self'.packages.hyuga
                   ]
                 );
               in
               pkgs.mkShell {
                 buildInputs = with pkgs; [
-                  self'.packages.hyuga
                   nil
                   nixfmt-rfc-style
                   python
+                  sass
                 ];
 
                 inputsFrom = [ self'.packages.cryosphere ];

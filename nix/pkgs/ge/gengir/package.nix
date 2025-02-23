@@ -2,9 +2,9 @@
   lib,
   rustPlatform,
   fetchPypi,
-  python313Packages,
+  python3Packages,
 }:
-python313Packages.buildPythonPackage rec {
+python3Packages.buildPythonPackage rec {
   pname = "gengir";
   version = "unstable-2022-09-09";
 
@@ -19,7 +19,7 @@ python313Packages.buildPythonPackage rec {
     hash = "sha256-hl48z6uDa4uywbeuvQDUHYvq5Y9/d9eS0R9aITtaNZ4=";
   };
 
-  build-system = with python313Packages; [ poetry-core ];
+  build-system = with python3Packages; [ poetry-core ];
 
   meta = {
     description = "Genuine* autocompletion for your PyGObject code!";
