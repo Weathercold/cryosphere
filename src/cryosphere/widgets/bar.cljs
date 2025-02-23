@@ -1,25 +1,32 @@
 (ns cryosphere.widgets.bar
-  (:require ["astal" :refer [Variable]]
+  (:require [cryosphere.widgets.vertical-label :refer [VLabel]]
+            ["astal" :refer [Variable bind]]
             ["astal/gtk4" :refer [App Astal Gtk]]))
+
 
 (def *time (.poll (Variable "") 1000 "date"))
 
+
 (defn Bar [monitor]
-  (let [{:keys [TOP LEFT RIGHT]} Astal.WindowAnchor]
+  (let [{:keys [LEFT TOP BOTTOM]} Astal.WindowAnchor]
     #jsx [:window {:visible true
                    :cssClasses ["Bar"]
                    :gdkmonitor monitor
                    :exclusivity Astal.Exclusivity.EXCLUSIVE
-                   :anchor (| TOP LEFT RIGHT)
+                   :anchor (| LEFT TOP BOTTOM)
                    :application App}
-          [:centerbox {:cssName "centerbox"}
-           [:button {:onClicked "echo hello"
-                     :hexpand true
-                     :halign Gtk.Align.CENTER}
-            "Welcome to AGS!"]
-           [:box]
-           [:menubutton {:hexpand true
-                         :halign Gtk.Align.CENTER}
-            [:label {:label (*time)}]
-            [:popover
-             [Gtk.Calendar]]]]]))
+          [:box {:cssName "root"
+                 :vertical true}
+           [:box {:cssName "island"
+                  :vertical true
+                  :valign Gtk.Align.START}
+            [:button {:onClicked "echo hello"
+                      :vexpand true}
+             [VLabel {:label "Hello world"}]]]
+           [:box {:cssName "island"
+                  :vertical true
+                  :valign Gtk.Align.END}
+            [:menubutton {:vexpand true}
+             [VLabel {:label (bind *time)}]
+             [:popover
+              [Gtk.Calendar]]]]]]))

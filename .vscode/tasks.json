@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "npm",
+            "script": "watch",
+            "label": "npm: watch",
+            "detail": "rm -r bin/*; npx squint-cljs watch",
+            "isBackground": true,
+            "problemMatcher": [],
+            "runOptions": {
+                "instanceLimit": 1,
+                "runOn": "folderOpen"
+            },
+        },
+        {
+            "type": "npm",
+            "script": "dev",
+            "label": "npm: dev",
+            "detail": "ags run --gtk4 bin/cryosphere/dev.jsx",
+            "problemMatcher": [],
+            "runOptions": {
+                "instanceLimit": 1,
+            },
+        }
+    ]
+}

@@ -1,7 +1,13 @@
 (ns cryosphere.app
-  (:require [cryosphere.widgets.bar :refer [Bar]]
-            ["astal/gtk4" :refer [App]]
-            ["../../assets/style.scss$default" :as style]))
+  (:require [cryosphere.utils :refer [run!]]
+            [cryosphere.widgets.bar :refer [Bar]]
+            ["../../assets/style.scss$default" :as style]
+            ["astal/gtk4" :refer [App]]))
 
-(.start App {:css style
-             :main (fn [] (seq (map Bar (App.get_monitors))))})
+
+(defn -main []
+  (App.start {:css style
+              :main (fn [] (run! Bar (App.get_monitors)))}))
+
+
+(-main)

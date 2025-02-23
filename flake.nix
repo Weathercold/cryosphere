@@ -67,6 +67,7 @@
                 nil
                 nixfmt-rfc-style
                 nodejs
+                nodemon
                 (pkgs.writeShellApplication {
                   name = "dots-deps-lock";
                   runtimeInputs = [ inputs'.clj-nix.packages.deps-lock ];

@@ -3,8 +3,13 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "dev": "npm run build && ags run --gtk4 -d bin/cryosphere",
-        "build": "rm -r bin/*; npx squint-cljs compile"
+        "build": "rm -r bin; npx squint-cljs compile",
+        "watch": "rm -r bin; npx squint-cljs watch",
+        "dev": "nodemon --watch bin --ext jsx --exec 'ags run --gtk4 bin/cryosphere/dev.jsx'",
+        "start": "ags run --gtk4 bin/cryosphere/app.jsx"
+    },
+    "dependencies": {
+        "astal": "file:/nix/store/8gdgv19z6zjnyn1nka273br8rzr0xzhp-astal-gjs/share/astal/gjs"
     },
     "devDependencies": {
         "squint-cljs": "^0.8.134"

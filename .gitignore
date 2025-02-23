@@ -2,6 +2,7 @@
 .direnv/
 @girs/
 bin/
+gen/
 node_modules/
 
 result
