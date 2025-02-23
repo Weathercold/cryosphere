@@ -1,10 +1,10 @@
 {
-  description = "Weathercold's Desktop Shell";
+  description = "Weathercold's GTK Shell";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    ags = {
-      url = "github:aylur/ags";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    astal = {
+      url = "github:Aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -15,13 +15,7 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      ags,
-      flake-parts,
-      ...
-    }@inputs:
+    { flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
@@ -36,7 +30,7 @@
           packages = rec {
             default = cryosphere;
             cryosphere = pkgs.callPackage ./nix/pkgs/cr/cryosphere/package.nix {
-              agsPackages = inputs'.ags.packages;
+              astalPackages = inputs'.astal.packages;
               inherit astal-py;
             };
             astal-py = pkgs.callPackage ./nix/pkgs/as/astal-py/package.nix {
@@ -50,21 +44,29 @@
 
           devShells = rec {
             default = cryosphere;
-            cryosphere = pkgs.mkShell {
-              buildInputs =
-                with pkgs;
-                with python313Packages;
-                [
-                  # Include all Astal libraries
-                  inputs'.ags.packages.agsFull
-                  self'.packages.astal-py
-                  hy
+            cryosphere =
+              let
+                python = pkgs.python313.withPackages (
+                  pythonPackages: with pythonPackages; [
+                    self'.packages.astal-py
+                    hy
+                  ]
+                );
+              in
+              pkgs.mkShell {
+                buildInputs = with pkgs; [
                   self'.packages.hyuga
                   nil
                   nixfmt-rfc-style
-                  python313
+                  python
                 ];
-            };
+
+                inputsFrom = [ self'.packages.cryosphere ];
+
+                shellHook = ''
+                  export PATH="${python}/bin:$PATH"
+                '';
+              };
           };
         };
     };

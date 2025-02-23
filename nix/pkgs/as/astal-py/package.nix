@@ -3,6 +3,7 @@
   fetchFromGitHub,
   python313Packages,
   gengir,
+  gobject-introspection,
 }:
 python313Packages.buildPythonPackage rec {
   pname = "astal-py";
