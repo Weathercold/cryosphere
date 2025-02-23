@@ -43,6 +43,7 @@
               inherit gengir;
             };
             gengir = pkgs.callPackage ./nix/pkgs/ge/gengir/package.nix { };
+            hyuga = pkgs.callPackage ./nix/pkgs/hy/hyuga/package.nix { };
           };
 
           formatter = pkgs.nixfmt-rfc-style;
@@ -58,6 +59,7 @@
                   inputs'.ags.packages.agsFull
                   self'.packages.astal-py
                   hy
+                  self'.packages.hyuga
                   nil
                   nixfmt-rfc-style
                   python313
