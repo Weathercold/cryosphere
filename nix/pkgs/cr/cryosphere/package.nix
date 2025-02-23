@@ -1,7 +1,8 @@
 {
-  agsPackages,
+  astalPackages,
   python313Packages,
   astal-py,
+  gobject-introspection,
 }:
 python313Packages.buildPythonApplication {
   pname = "cryosphere";
@@ -15,7 +16,10 @@ python313Packages.buildPythonApplication {
     hy
   ];
 
-  buildInputs = with agsPackages; [
+  buildInputs = with astalPackages; [
+    io
+    astal3
+    astal4
     apps
     battery
     bluetooth
@@ -26,5 +30,7 @@ python313Packages.buildPythonApplication {
     notifd
     tray
     wireplumber
+
+    gobject-introspection
   ];
 }
