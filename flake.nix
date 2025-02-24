@@ -4,7 +4,14 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     ags = {
-      url = "github:aylur/ags";
+      url = "github:Aylur/ags";
+      inputs = {
+        astal.follows = "astal";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+    astal = {
+      url = "github:ARKye03/astal/feat/CircularProgressWidget";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dots = {
@@ -25,8 +32,6 @@
 
   outputs =
     {
-      self,
-      nixpkgs,
       ags,
       flake-parts,
       ...
@@ -64,6 +69,7 @@
                 # Include all Astal libraries
                 inputs'.ags.packages.agsFull
                 self'.packages.dots
+                gjs
                 nil
                 nixfmt-rfc-style
                 nodejs

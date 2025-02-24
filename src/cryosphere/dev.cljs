@@ -11,7 +11,7 @@
     (App.reset_css)
     (js-await (execAsync "sass ../../assets/style.scss /tmp/cryosphere/style.css"))
     (App.apply_css "/tmp/cryosphere/style.css")
-    (println "CSS reloaded on" ev)))
+    (println "CSS reloaded")))
 
 (defn -main []
   (AstalIO/monitor_file "../../assets" reload-css)) ; Hot reload

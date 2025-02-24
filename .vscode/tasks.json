@@ -6,22 +6,30 @@
             "script": "watch",
             "label": "npm: watch",
             "detail": "rm -r bin/*; npx squint-cljs watch",
+            "icon": {
+                "id": "tools"
+            },
             "isBackground": true,
             "problemMatcher": [],
             "runOptions": {
                 "instanceLimit": 1,
                 "runOn": "folderOpen"
-            },
+            }
         },
         {
             "type": "npm",
             "script": "dev",
             "label": "npm: dev",
-            "detail": "ags run --gtk4 bin/cryosphere/dev.jsx",
+            "detail": "sleep 3 && nodemon --watch bin --ext jsx --exec 'ags run --gtk4 bin/cryosphere/dev.jsx'",
+            "icon": {
+                "id": "debug-rerun"
+            },
+            "isBackground": true,
             "problemMatcher": [],
             "runOptions": {
                 "instanceLimit": 1,
-            },
+                "runOn": "folderOpen"
+            }
         }
     ]
 }

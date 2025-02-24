@@ -1,10 +1,7 @@
 (ns cryosphere.widgets.bar
-  (:require [cryosphere.widgets.vertical-label :refer [VLabel]]
-            ["astal" :refer [Variable bind]]
+  (:require [cryosphere.widgets.bar.battery :refer [Battery]]
+            [cryosphere.widgets.bar.date :refer [Date]]
             ["astal/gtk4" :refer [App Astal Gtk]]))
-
-
-(def *time (.poll (Variable "") 1000 "date"))
 
 
 (defn Bar [monitor]
@@ -15,18 +12,12 @@
                    :exclusivity Astal.Exclusivity.EXCLUSIVE
                    :anchor (| LEFT TOP BOTTOM)
                    :application App}
-          [:box {:cssName "root"
+          [:box {:name "root"
                  :vertical true}
-           [:box {:cssName "island"
-                  :vertical true
+           [:box {:cssClasses ["islands"]
                   :valign Gtk.Align.START}
-            [:button {:onClicked "echo hello"
-                      :vexpand true}
-             [VLabel {:label "Hello world"}]]]
-           [:box {:cssName "island"
-                  :vertical true
+            [Battery]]
+
+           [:box {:cssClasses ["islands"]
                   :valign Gtk.Align.END}
-            [:menubutton {:vexpand true}
-             [VLabel {:label (bind *time)}]
-             [:popover
-              [Gtk.Calendar]]]]]]))
+            [Date]]]]))

@@ -1,7 +1,7 @@
 (ns cryosphere.widgets.vertical-label
   (:require [cryosphere.utils :refer [as]]
-            ["gi://Pango$default" :as Pango]
-            ["gi://Gtk$default" :as Gtk]))
+            ["gi://Gtk?version=4.0$default" :as Gtk]
+            ["gi://Pango$default" :as Pango]))
 
 
 (defn VLabel [{:keys [label]}]

@@ -7,18 +7,26 @@ window.Bar {
 	color: $fg-color;
 	font-weight: bold;
 
-	> root {
-		background: $bg-color;
-		border-radius: 10px;
-		margin: 8px;
+	#root {
+		margin: 20px;
+		margin-right: 3px;
 	}
 
-	island {
-		border-radius: 100%;
+	.island {
+		background-color: $bg-color;
+		border-radius: 100px;
+	}
+
+	#battery > circ-prog {
+		margin-top: 8px;
+		margin-bottom: 8px;
 	}
 
 	button {
-		border-radius: 8px;
-		margin: 2px;
+		border-radius: 100px;
+
+		&:not(:hover):not(:checked) {
+			background-color: transparent;
+		}
 	}
 }
