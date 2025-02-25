@@ -1,8 +1,7 @@
 (ns cryosphere.widgets.bar.battery
   (:require [cryosphere.widgets.vertical-label :refer [VLabel]]
-            ["astal" :refer [Variable]]
+            ["astal" :refer [Variable]]))
             ;; ["gi://AstalBattery$default" :as AstalBattery]
-            ["gi://Gtk$default" :as Gtk]))
 
 
 (def *battery (.poll (Variable "") 10000
@@ -14,7 +13,6 @@
               :cssClasses ["island"]}
         [:circularprogress {:cssName "circ-prog"
                             :percentage (*battery #(/ (parseInt %) 100))
-                            :rounded true
                             :line-width 3
                             :hexpand true}
          [VLabel {:label ""

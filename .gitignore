@@ -1,5 +1,7 @@
 .cache/
 .direnv/
+.sass-cache/
+__pycache__/
 @girs/
 bin/
 gen/

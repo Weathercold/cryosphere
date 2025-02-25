@@ -8,10 +8,10 @@
 
 
 (defn Date [_]
-  #jsx [:box {:cssClasses ["island"]
+  #jsx [:box {:name "date"
+              :cssClasses ["island"]
               :vertical true}
-        [:menubutton {:name "date"
-                      :vexpand true}
+        [:menubutton
          [VLabel {:label (bind *time)}]
          [:popover
           [Gtk.Calendar]]]])
