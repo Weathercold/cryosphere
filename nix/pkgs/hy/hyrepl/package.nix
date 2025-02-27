@@ -5,7 +5,7 @@
 }:
 python3Packages.buildPythonPackage {
   pname = "hyrepl";
-  version = "unstable-2024-11-30";
+  version = "0-unstable-2024-11-30";
   pyproject = true;
 
   src = fetchFromGitHub {

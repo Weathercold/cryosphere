@@ -3,7 +3,7 @@
   python3Packages,
   fetchFromGitHub,
 }:
-python3Packages.buildPythonApplication rec {
+python3Packages.buildPythonPackage rec {
   pname = "hyuga";
   version = "1.0.0";
   pyproject = true;
@@ -19,35 +19,20 @@ python3Packages.buildPythonApplication rec {
 
   dependencies = with python3Packages; [
     hy
-    (hyrule.overridePythonAttrs (_: rec {
-      version = "0.7.0";
-      src = fetchPypi {
-        pname = "hyrule";
-        inherit version;
-        hash = "sha256-Oks1aKv+FtFoleWEwNuEwSUdJY/iNLqG8HKQa5BUXOg=";
-      };
-      doCheck = false;
-    }))
+    hyrule
     pygls
     setuptools
-    (toolz.overridePythonAttrs (_: rec {
-      version = "0.12.1";
-      src = fetchPypi {
-        pname = "toolz";
-        inherit version;
-        hash = "sha256-7Mo0JmSJPxd6E9rA5rQcvYrCWjWOXyFTFtQ+IQAiT00=";
-      };
-    }))
+    toolz
   ];
 
   pythonImportsCheck = [
     "hyuga"
   ];
 
-  meta = {
+  meta = with lib; {
     description = "Yet Another Hy Language Server";
     homepage = "https://github.com/sakuraiyuta/hyuga";
-    license = lib.licenses.mit;
+    license = licenses.mit;
     mainProgram = "hyuga";
   };
 }

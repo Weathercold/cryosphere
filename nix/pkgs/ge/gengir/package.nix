@@ -6,7 +6,7 @@
 }:
 python3Packages.buildPythonPackage rec {
   pname = "gengir";
-  version = "unstable-2022-09-09";
+  version = "1.0.2-unstable-2022-09-09";
 
   src = fetchPypi {
     pname = "gengir";
@@ -21,10 +21,10 @@ python3Packages.buildPythonPackage rec {
 
   build-system = with python3Packages; [ poetry-core ];
 
-  meta = {
+  meta = with lib; {
     description = "Genuine* autocompletion for your PyGObject code!";
     homepage = "https://github.com/santiagocezar/gengir";
-    license = lib.licenses.mit;
+    license = licenses.mit;
     mainProgram = "gengir";
   };
 }
