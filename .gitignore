@@ -3,8 +3,10 @@
 .direnv/
 .sass-cache/
 .venv/
+@girs/
 __pycache__/
 bin/
+gen/
 node_modules/
 
 result

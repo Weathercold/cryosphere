@@ -26,50 +26,81 @@
           pkgs,
           ...
         }:
+
+        let
+          inherit (pkgs.lib) singleton;
+
+          finalPkgs = pkgs.extend (
+            _: prev: {
+              pythonPackagesExtensions =
+                prev.pythonPackagesExtensions
+                ++ singleton (
+                  _: pyPrev: {
+                    hyrule = pyPrev.hyrule.overridePythonAttrs (_: rec {
+                      version = "0.7.0";
+                      src = prev.fetchPypi {
+                        pname = "hyrule";
+                        inherit version;
+                        hash = "sha256-Oks1aKv+FtFoleWEwNuEwSUdJY/iNLqG8HKQa5BUXOg=";
+                      };
+                      doCheck = false;
+                    });
+                    toolz = pyPrev.toolz.overridePythonAttrs (_: rec {
+                      version = "0.12.1";
+                      src = prev.fetchPypi {
+                        pname = "toolz";
+                        inherit version;
+                        hash = "sha256-7Mo0JmSJPxd6E9rA5rQcvYrCWjWOXyFTFtQ+IQAiT00=";
+                      };
+                    });
+                  }
+                );
+            }
+          );
+
+          python = finalPkgs.python3.withPackages (
+            pythonPackages: with pythonPackages; [
+              self'.packages.astal-py
+              hy
+              self'.packages.hyrepl
+              self'.packages.hyuga
+            ]
+          );
+        in
+
         {
           packages = rec {
             default = cryosphere;
-            cryosphere = pkgs.callPackage ./nix/pkgs/cr/cryosphere/package.nix {
+            cryosphere = finalPkgs.callPackage ./nix/pkgs/cr/cryosphere/package.nix {
               astalPackages = inputs'.astal.packages;
               inherit astal-py;
             };
-            astal-py = pkgs.callPackage ./nix/pkgs/as/astal-py/package.nix {
+            astal-py = finalPkgs.callPackage ./nix/pkgs/as/astal-py/package.nix {
               inherit gengir;
             };
-            gengir = pkgs.callPackage ./nix/pkgs/ge/gengir/package.nix { };
-            hyrepl = pkgs.callPackage ./nix/pkgs/hy/hyrepl/package.nix { };
-            hyuga = pkgs.callPackage ./nix/pkgs/hy/hyuga/package.nix { };
+            gengir = finalPkgs.callPackage ./nix/pkgs/ge/gengir/package.nix { };
+            hyrepl = finalPkgs.callPackage ./nix/pkgs/hy/hyrepl/package.nix { };
+            hyuga = finalPkgs.callPackage ./nix/pkgs/hy/hyuga/package.nix { };
           };
 
-          formatter = pkgs.nixfmt-rfc-style;
+          formatter = finalPkgs.nixfmt-rfc-style;
 
           devShells = rec {
             default = cryosphere;
-            cryosphere =
-              let
-                python = pkgs.python3.withPackages (
-                  pythonPackages: with pythonPackages; [
-                    self'.packages.astal-py
-                    hy
-                    self'.packages.hyrepl
-                    self'.packages.hyuga
-                  ]
-                );
-              in
-              pkgs.mkShell {
-                buildInputs = with pkgs; [
-                  nil
-                  nixfmt-rfc-style
-                  python
-                  sass
-                ];
+            cryosphere = finalPkgs.mkShell {
+              buildInputs = with finalPkgs; [
+                nil
+                nixfmt-rfc-style
+                python
+                sass
+              ];
 
-                inputsFrom = [ self'.packages.cryosphere ];
+              inputsFrom = [ self'.packages.cryosphere ];
 
-                shellHook = ''
-                  export PATH="${python}/bin:$PATH"
-                '';
-              };
+              shellHook = ''
+                export PATH="${python}/bin:$PATH"
+              '';
+            };
           };
         };
     };

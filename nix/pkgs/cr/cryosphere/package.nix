@@ -6,7 +6,7 @@
 }:
 python3Packages.buildPythonApplication {
   pname = "cryosphere";
-  version = "unstable-0.0.1";
+  version = "0.0.1";
   pyproject = true;
 
   src = ../../../../.;
