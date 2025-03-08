@@ -1,6 +1,6 @@
 (ns cryosphere.widgets.bar
   (:require [cryosphere.widgets.bar.battery :refer [Battery]]
-            [cryosphere.widgets.bar.date :refer [Date]]
+            [cryosphere.widgets.bar.time :refer [Time]]
             [cryosphere.widgets.bar.hyprland :refer [Workspaces]]
             ["astal/gtk4" :refer [App Astal Gtk]]))
 
@@ -22,7 +22,7 @@
            [:box {:cssClasses ["islands"]
                   :vexpand true
                   :valign Gtk.Align.CENTER}
-            [Date]]
+            [Time]]
 
            [:box {:cssClasses ["islands"]
                   :valign Gtk.Align.END}

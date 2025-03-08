@@ -1,14 +1,16 @@
-(ns cryosphere.widgets.bar.date
+(ns cryosphere.widgets.bar.time
   (:require [cryosphere.widgets.vertical-label :refer [VLabel]]
             ["astal" :refer [Variable bind]]
+            ["gi://GLib$default" :as GLib]
             ["gi://Gtk$default" :as Gtk]))
 
 
-(def *time (.poll (Variable "") 1000 "date +'%m %e ― %H %M'"))
+(def *time (.poll (Variable "") 1000
+                  #(.format (GLib/DateTime.new_now_local) "%m %d ― %H %M")))
 
 
-(defn Date [_]
-  #jsx [:box {:name "date"
+(defn Time [_]
+  #jsx [:box {:name "time"
               :cssClasses ["island"]
               :vertical true}
         [:menubutton
