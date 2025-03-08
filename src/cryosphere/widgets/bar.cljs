@@ -2,7 +2,8 @@
   (:require [cryosphere.widgets.bar.battery :refer [Battery]]
             [cryosphere.widgets.bar.time :refer [Time]]
             [cryosphere.widgets.bar.hyprland :refer [Workspaces]]
-            ["astal/gtk4" :refer [App Astal Gtk]]))
+            ["astal/gtk4" :refer [App Astal]]
+            ["gi://Gtk?version=4.0$default" :as Gtk]))
 
 
 (defn Bar [monitor]
@@ -13,17 +14,13 @@
                    :exclusivity Astal.Exclusivity.EXCLUSIVE
                    :anchor (| LEFT TOP BOTTOM)
                    :application App}
-          [:box {:name "root"
-                 :vertical true}
-           [:box {:cssClasses ["islands"]
-                  :valign Gtk.Align.START}
+          [:centerbox {:name "root"
+                       :orientation Gtk/Orientation.VERTICAL}
+           [:box {:cssClasses ["islands"]}
             [Battery]]
 
-           [:box {:cssClasses ["islands"]
-                  :vexpand true
-                  :valign Gtk.Align.CENTER}
+           [:box {:cssClasses ["islands"]}
             [Time]]
 
-           [:box {:cssClasses ["islands"]
-                  :valign Gtk.Align.END}
+           [:box {:cssClasses ["islands"]}
             [Workspaces]]]]))

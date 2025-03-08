@@ -5,7 +5,7 @@
             ["gi://Gtk$default" :as Gtk]))
 
 
-(def *time (.poll (Variable "") 1000
+(def time* (.poll (Variable "") 1000
                   #(.format (GLib/DateTime.new_now_local) "%m %d ― %H %M")))
 
 
@@ -14,6 +14,6 @@
               :cssClasses ["island"]
               :vertical true}
         [:menubutton
-         [VLabel {:label (bind *time)}]
+         [VLabel {:label (bind time*)}]
          [:popover
           [Gtk.Calendar]]]])

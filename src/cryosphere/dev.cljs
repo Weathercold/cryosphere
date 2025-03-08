@@ -18,3 +18,7 @@
 
 
 (-main)
+
+
+(comment
+  (print (App.get_icon_theme)))

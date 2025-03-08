@@ -1,19 +1,24 @@
 (ns cryosphere.widgets.bar.battery
-  (:require [cryosphere.widgets.vertical-label :refer [VLabel]]
-            ["astal" :refer [Variable]]))
-            ;; ["gi://AstalBattery$default" :as AstalBattery]
+  (:require [cryosphere.utils :refer [round bind derive-props]]
+            ["gi://Gtk?version=4.0$default" :as Gtk]
+            ["gi://AstalBattery$default" :as AstalBattery]))
 
 
-(def *battery (.poll (Variable "") 10000
-                    ;;  #(.-percentage (AstalBattery/get_default))
-                     "cat /sys/class/power_supply/BAT0/capacity"))
+(def battery (AstalBattery/get_default))
+(def label* (derive-props battery ["energy" "energy-rate" "time-to-empty"]
+                          (fn [energy energy-rate time-to-empty]
+                            (str (round energy 2) "kWh / "
+                                 (round energy-rate 2) "kW = "
+                                 (round (/ time-to-empty 3600) 2) "h"))))
+
 
 (defn Battery [_]
-  #jsx [:box {:name "battery"
-              :cssClasses ["island"]}
+  #jsx [:menubutton {:name "battery"
+                     :cssClasses ["island"]}
         [:circularprogress {:cssName "circ-prog"
-                            :percentage (*battery #(/ (parseInt %) 100))
+                            :percentage (bind battery "percentage")
                             :line-width 3
                             :hexpand true}
-         [VLabel {:label ""
-                  :cssName "icon"}]]])
+         [:image {:iconName (bind battery "icon-name")}]]
+        [:popover {:position Gtk/PositionType.GTK_POS_LEFT}
+         [:label {:label (bind label*)}]]])

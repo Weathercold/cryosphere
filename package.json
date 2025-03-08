@@ -10,7 +10,7 @@
         "release": "npm run build && ags bundle bin/cryosphere/app.jsx bin/dist/cryosphere"
     },
     "dependencies": {
-        "astal": "file:/nix/store/8gdgv19z6zjnyn1nka273br8rzr0xzhp-astal-gjs/share/astal/gjs"
+        "astal": "file:../../../../nix/store/qiijqlw7yphi4ddkx4h80p3vg914b4pl-astal-gjs/share/astal/gjs"
     },
     "devDependencies": {
         "squint-cljs": "^0.8.134"

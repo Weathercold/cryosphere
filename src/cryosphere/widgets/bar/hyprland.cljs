@@ -1,10 +1,10 @@
 (ns cryosphere.widgets.bar.hyprland
-  (:require [cryosphere.widgets.vertical-label :refer [VLabel]]
+  (:require [cryosphere.utils :refer [bind]]
+            [cryosphere.widgets.vertical-label :refer [VLabel]]
             ["gi://AstalHyprland$default" :as AstalHyprland]))
 
 
-(def *instance (AstalHyprland/get_default))
-(def *workspace (.-focused-workspace *instance))
+(def hyprland (AstalHyprland/get_default))
 
 
 (defn Workspaces [_]
@@ -12,5 +12,6 @@
               :cssClasses ["island"]
               :vertical true}
         (doall (for [i (range 1 6)]
-                 #jsx [:button {:onClicked #(.dispatch *instance "workspace" (str i))}
-                       [VLabel {:label i}]]))])
+                 #jsx [:button {:onClicked #(.dispatch hyprland "workspace" (str i))}
+                       [VLabel {:label (bind hyprland "focused-workspace"
+                                             #(if (= i (.-id %)) "●" "○"))}]]))])

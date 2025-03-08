@@ -67,9 +67,10 @@
             cryosphere = pkgs.mkShell {
               buildInputs = with pkgs; [
                 # Include all Astal libraries
-                inputs'.ags.packages.agsFull
+                (inputs'.ags.packages.ags.override {
+                  extraPackages = self'.packages.cryosphere.buildInputs;
+                })
                 self'.packages.dots
-                gjs
                 nil
                 nixfmt-rfc-style
                 nodejs
@@ -83,6 +84,12 @@
                   '';
                 })
               ];
+
+              inputsFrom = [ self'.packages.cryosphere ];
+
+              shellHook = ''
+                npm i ${inputs'.astal.packages.gjs}/share/astal/gjs
+              '';
             };
           };
         };
