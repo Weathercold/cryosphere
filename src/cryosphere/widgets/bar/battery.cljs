@@ -15,10 +15,10 @@
 (defn Battery [_]
   #jsx [:menubutton {:name "battery"
                      :cssClasses ["island"]}
-        [:circularprogress {:cssName "circ-prog"
-                            :percentage (bind battery "percentage")
-                            :line-width 3
-                            :hexpand true}
-         [:image {:iconName (bind battery "icon-name")}]]
+        #_[:circularprogress {:cssName "circ-prog"
+                              :percentage (bind battery "percentage")
+                              :line-width 3
+                              :hexpand true}]
+        [:image {:iconName (bind battery "icon-name")}]
         [:popover {:position Gtk/PositionType.GTK_POS_LEFT}
          [:label {:label (bind label*)}]]])

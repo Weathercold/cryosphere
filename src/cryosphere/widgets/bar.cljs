@@ -1,7 +1,9 @@
 (ns cryosphere.widgets.bar
-  (:require [cryosphere.widgets.bar.battery :refer [Battery]]
-            [cryosphere.widgets.bar.time :refer [Time]]
-            [cryosphere.widgets.bar.hyprland :refer [Workspaces]]
+  (:require [cryosphere.widgets.bar.hyprland :refer [Workspaces]]
+            [cryosphere.widgets.bar.cava :refer [Cava]]
+            [cryosphere.widgets.bar.datetime :refer [Datetime]]
+            [cryosphere.widgets.bar.battery :refer [Battery]]
+            [cryosphere.widgets.bar.system :refer [System]]
             ["astal/gtk4" :refer [App Astal]]
             ["gi://Gtk?version=4.0$default" :as Gtk]))
 
@@ -16,11 +18,16 @@
                    :application App}
           [:centerbox {:name "root"
                        :orientation Gtk/Orientation.VERTICAL}
-           [:box {:cssClasses ["islands"]}
-            [Battery]]
+           [:box {:cssClasses ["islands"]
+                  :vertical true}
+            [Workspaces]]
 
-           [:box {:cssClasses ["islands"]}
-            [Time]]
+           [:box {:cssClasses ["islands"]
+                  :vertical true}
+            [Cava]
+            [Datetime]]
 
-           [:box {:cssClasses ["islands"]}
-            [Workspaces]]]]))
+           [:box {:cssClasses ["islands"]
+                  :vertical true}
+            [Battery]
+            [System]]]]))

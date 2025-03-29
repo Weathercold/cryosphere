@@ -1,6 +1,5 @@
 (ns cryosphere.app
-  (:require [cryosphere.utils :refer [run!]]
-            [cryosphere.widgets.bar :refer [Bar]]
+  (:require [cryosphere.widgets.bar :refer [Bar]]
             ["../../assets/style.scss$default" :as style]
             ["astal/gtk4" :refer [App]]))
 

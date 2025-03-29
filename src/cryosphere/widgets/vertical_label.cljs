@@ -6,8 +6,8 @@
 
 (defn VLabel [{:keys [label]}]
   #jsx [:label {:label (as #(str "<span insert-hyphens='no'>" % "</span>") label)
-                :use_markup true
+                :use-markup true
                 :wrap true
-                :wrap_mode Pango/WrapMode.WORD_CHAR
+                :wrap-mode Pango/WrapMode.WORD_CHAR
                 :max-width-chars 3
                 :justify Gtk/Justification.CENTER}])

@@ -13,6 +13,6 @@
         "astal": "file:../../../../nix/store/qiijqlw7yphi4ddkx4h80p3vg914b4pl-astal-gjs/share/astal/gjs"
     },
     "devDependencies": {
-        "squint-cljs": "^0.8.134"
+        "squint-cljs": "^0.8.142"
     }
 }

@@ -5,21 +5,46 @@ $bg-color: #{"@theme_bg_color"};
 window.Bar {
 	background: transparent;
 	color: $fg-color;
-	font-weight: bold;
+	font-family: "DepartureMono Nerd Font Mono";
 
 	#root {
 		margin: 20px;
 		margin-right: 3px;
 	}
 
-	.island {
-		background-color: $bg-color;
-		border-radius: 100px;
+	.islands {
+		> * {
+			margin-top: 1rem;
+		}
+		> *:nth-child(1) {
+			margin-top: 0;
+		}
 	}
 
-	#battery > circ-prog {
-		margin-top: 8px;
-		margin-bottom: 8px;
+	.island {
+		min-height: 2.6rem;
+		border-radius: 100px;
+		background-color: $bg-color;
+	}
+
+	#system > label {
+		font-size: 2rem;
+	}
+
+	#workspaces > button {
+		padding-top: 0;
+		padding-bottom: 0;
+
+		&:nth-child(1) {
+			padding-top: 0.6rem;
+		}
+		&:nth-last-child(1) {
+			padding-bottom: 0.6rem;
+		}
+
+		> label {
+			font-size: 1.4rem;
+		}
 	}
 
 	button {

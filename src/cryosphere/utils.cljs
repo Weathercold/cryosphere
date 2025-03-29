@@ -1,12 +1,28 @@
 (ns cryosphere.utils
-  (:require ["astal" :refer [Binding derive] :as astal]))
+  (:require ["astal" :refer [Binding Variable derive] :as astal]))
 
-#_{:clj-kondo/ignore [:redefined-var]}
-(defn run! [f coll]
-  (doall (map f coll)))
+;;; region Misc
+
 (def domap
   "Map over coll eagerly"
   run!)
+(defmacro dofor
+  "Eager list comprehension"
+  [seq-exprs body]
+  `(doall (for ~seq-exprs ~body)))
+
+(defn round
+  "Round to n decimal places"
+  [x n]
+  (let [m (Math/pow 10 n)]
+    (-> x (* m) Math/round (/ m))))
+
+;;; region Astal
+
+(defn poll
+  "Create new variable and poll with function"
+  [interval f]
+  (.poll (Variable (f)) interval f))
 
 (defn bind
   "Bind to emitter or its prop and optionally change transform fn"
@@ -19,7 +35,7 @@
       b)))
 
 (defn derive-props
-  "Binds to one or many props of emitter and derives from them"
+  "Bind to one or many props of emitter and derive from them"
   ([emitter props]
    (derive-props emitter props identity))
   ([emitter props f]
@@ -29,9 +45,3 @@
   "Apply f to x, using .as() if x is a Binding"
   [f x]
   (if (instance? Binding x) (.as x f) (f x)))
-
-(defn round
-  "Round to n decimal places"
-  [x n]
-  (let [m (Math/pow 10 n)]
-    (-> x (* m) Math/round (/ m))))
