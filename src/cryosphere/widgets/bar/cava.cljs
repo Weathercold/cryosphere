@@ -2,8 +2,7 @@
   (:require [cryosphere.widgets.misc :refer [DrawingArea]]
             ["astal" :refer [bind]]
             ["cairo$default" :as Cairo]
-            ["gi://AstalCava$default" :as AstalCava]
-            ["gi://Gtk?version=4.0$default" :as Gtk]))
+            ["gi://AstalCava$default" :as AstalCava]))
 
 
 (def nbars 10)
@@ -13,7 +12,7 @@
 
 
 (defn- render [widget cr width height]
-  (let [bars (partition nbars (.get_values cava))
+  (let [bars (partition nbars (.get_values cava)) ; Left & right channels
         color (.get_color widget)]
     (doto cr
       (.setLineWidth 3)
@@ -21,7 +20,7 @@
       (.setSourceRGBA color.red color.green color.blue color.alpha))
     (loop [i 0]
       (when (< i nbars)
-        (let [y (-> i (- (/ nbars 2)) (+ 0.5) (* 6) (+ (/ height 2)))
+        (let [y (-> (/ nbars 2) (- i 0.5) (* 6) (+ (/ height 2))) ; Bottom to top
               x1 (-> (first bars) (nth i) (* -10) (+ (/ width 2)))
               x2 (-> (second bars) (nth i) (* 10) (+ (/ width 2)))]
           (.moveTo cr x1 y)
