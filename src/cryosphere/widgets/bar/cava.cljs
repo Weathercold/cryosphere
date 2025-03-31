@@ -29,10 +29,10 @@
   (.stroke cr))
 
 (defn Cava [_]
-  #jsx [:box {:name "cava"
-              :cssClasses ["island"]
+  #jsx [:box {:name :cava
+              :cssClasses [:island]
               :vertical true}
         [DrawingArea {:height 80
                       :onDraw render
-                      :setup (fn [widget] (.subscribe (bind cava "values")
+                      :setup (fn [widget] (.subscribe (bind cava :values)
                                                       #(widget.queue_draw)))}]])

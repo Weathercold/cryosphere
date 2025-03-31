@@ -3,7 +3,7 @@
             ["gi://Gtk?version=4.0$default" :as Gtk]))
 
 (defn System [_]
-  #jsx [:box {:name "system"
-              :cssClasses ["island"]
+  #jsx [:box {:name :system
+              :cssClasses [:island]
               :vertical true}
         [:label {:label "󱄅"}]])

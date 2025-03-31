@@ -1,6 +1,7 @@
 (ns cryosphere.widgets.bar
   (:require [cryosphere.widgets.bar.hyprland :refer [Workspaces]]
             [cryosphere.widgets.bar.cava :refer [Cava]]
+            [cryosphere.widgets.bar.mpris :refer [Mpris]]
             [cryosphere.widgets.bar.datetime :refer [Datetime]]
             [cryosphere.widgets.bar.battery :refer [Battery]]
             [cryosphere.widgets.bar.system :refer [System]]
@@ -10,24 +11,24 @@
 
 (defn Bar [monitor]
   (let [{:keys [LEFT TOP BOTTOM]} Astal.WindowAnchor]
-    #jsx [:window {:visible true
-                   :cssClasses ["Bar"]
+    #jsx [:window {:name :bar
+                   :visible true
                    :gdkmonitor monitor
                    :exclusivity Astal.Exclusivity.EXCLUSIVE
                    :anchor (| LEFT TOP BOTTOM)
                    :application App}
-          [:centerbox {:name "root"
+          [:centerbox {:name :root
                        :orientation Gtk/Orientation.VERTICAL}
-           [:box {:cssClasses ["islands"]
+           [:box {:cssClasses [:islands]
                   :vertical true}
             [Workspaces]]
 
-           [:box {:cssClasses ["islands"]
+           [:box {:cssClasses [:islands]
                   :vertical true}
             [Cava]
             [Datetime]]
 
-           [:box {:cssClasses ["islands"]
+           [:box {:cssClasses [:islands]
                   :vertical true}
             [Battery]
             [System]]]]))

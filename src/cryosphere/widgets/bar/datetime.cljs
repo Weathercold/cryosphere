@@ -3,7 +3,7 @@
             [cryosphere.widgets.vertical-label :refer [VLabel]]
             ["astal" :refer [bind derive]]
             ["gi://GLib$default" :as GLib]
-            ["gi://Gtk$default" :as Gtk]))
+            ["gi://Gtk?version=4.0$default" :as Gtk]))
 
 
 (def datetime* (poll 1000 #(GLib/DateTime.new_now_local)))
@@ -12,8 +12,8 @@
 
 
 (defn Datetime [_]
-  #jsx [:menubutton {:name "datetime"
-                     :cssClasses ["island"]}
+  #jsx [:menubutton {:name :datetime
+                     :cssClasses [:island]}
         [:box {:vertical true}
          [VLabel {:label (bind date*)}]
          [Gtk/Separator]
