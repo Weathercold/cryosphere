@@ -1,9 +1,8 @@
-(ns cryosphere.widgets.bar.system
-  (:require [cryosphere.widgets.vertical-label :refer [VLabel]]
-            ["gi://Gtk?version=4.0$default" :as Gtk]))
+(ns cryosphere.widgets.bar.system)
+
 
 (defn System [_]
-  #jsx [:box {:name :system
+  #jsx [:box {:name       :system
               :cssClasses [:island]
-              :vertical true}
+              :vertical   true}
         [:label {:label "󱄅"}]])

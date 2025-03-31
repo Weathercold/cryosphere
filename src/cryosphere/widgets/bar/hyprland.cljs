@@ -8,12 +8,12 @@
 
 
 (defn Workspaces [_]
-  #jsx [:box {:name :workspaces
+  #jsx [:box {:name       :workspaces
               :cssClasses [:island]
-              :vertical true}
+              :vertical   true}
         (doall (for [i (range 1 6)]
                  #jsx [:button {:onClicked #(.dispatch hyprland :workspace (str i))
-                                :cursor (Gdk/Cursor.new_from_name :pointer nil)}
-                       [:label {:label (bind hyprland :focused-workspace
-                                             #(if (= i (.-id %)) "" ""))
+                                :cursor    (Gdk/Cursor.new_from_name :pointer nil)}
+                       [:label {:label  (bind hyprland :focused-workspace
+                                              #(if (= i (.-id %)) "" ""))
                                 :xalign 0.59}]]))])

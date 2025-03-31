@@ -71,6 +71,7 @@
                   extraPackages = self'.packages.cryosphere.buildInputs;
                 })
                 self'.packages.dots
+                matugen
                 nil
                 nixfmt-rfc-style
                 nodejs

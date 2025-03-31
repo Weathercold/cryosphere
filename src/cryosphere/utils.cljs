@@ -3,9 +3,10 @@
 
 ;;; region Misc
 
-(def domap
+(defn domap
   "Map over coll eagerly"
-  run!)
+  [f & colls]
+  (doall (apply map f colls)))
 (defmacro dofor
   "Eager list comprehension"
   [seq-exprs body]
@@ -16,6 +17,10 @@
   [x n]
   (let [m (Math/pow 10 n)]
     (-> x (* m) Math/round (/ m))))
+
+#_{:clj-kondo/ignore [:redefined-var]}
+(defn reverse [s]
+  (apply str (clojure.core/reverse s)))
 
 ;;; region Astal
 
@@ -34,14 +39,32 @@
       (.as b (last prop-or-fn))
       b)))
 
+(defn derive-vprops
+  "Bind to one or many props of value of dep and derive from them. Rederive on
+   change."
+  [dep props f]
+  (let [derived  (Variable)
+        rederive (fn [] (when-let [v (.get dep)]
+                          (let [binds   (domap #(astal/bind v %) props)
+                                compute (fn [] (apply f (domap #(.get %) binds)))
+                                unsubs  (domap (fn [b] (.subscribe b #(.set derived (compute))))
+                                               binds)]
+                            (.set derived (compute))
+                            (.onDropped derived (fn [] (run! #(%) unsubs))))))
+        unsub-dep (.subscribe dep rederive)]
+    (rederive)
+    (.onDropped derived unsub-dep)
+    derived))
+
 (defn derive-props
-  "Bind to one or many props of emitter and derive from them"
-  ([emitter props]
-   (derive-props emitter props identity))
-  ([emitter props f]
-   (derive (doall (map #(astal/bind emitter %) props)) f)))
+  "Bind to one or many props of dep and derive from them"
+  ([dep props]
+   (derive-props dep props identity))
+  ([dep props f]
+   (derive (domap #(astal/bind dep %) props) f)))
 
 (defn as
-  "Apply f to x, using .as() if x is a Binding"
+  "Return a new binding with f as transform function if x is a Binding, else
+   apply f to x."
   [f x]
   (if (instance? Binding x) (.as x f) (f x)))

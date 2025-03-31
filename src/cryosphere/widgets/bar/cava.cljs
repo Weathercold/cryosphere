@@ -12,7 +12,7 @@
 
 
 (defn- render [widget cr width height]
-  (let [bars (partition nbars (.get_values cava)) ; Left & right channels
+  (let [bars  (partition nbars (.get_values cava)) ; Left & right channels
         color (.get_color widget)]
     (doto cr
       (.setLineWidth 3)
@@ -20,7 +20,7 @@
       (.setSourceRGBA color.red color.green color.blue color.alpha))
     (loop [i 0]
       (when (< i nbars)
-        (let [y (-> (/ nbars 2) (- i 0.5) (* 6) (+ (/ height 2))) ; Bottom to top
+        (let [y  (-> (/ nbars 2) (- i 0.5) (* 6) (+ (/ height 2))) ; Bottom to top
               x1 (-> (first bars) (nth i) (* -10) (+ (/ width 2)))
               x2 (-> (second bars) (nth i) (* 10) (+ (/ width 2)))]
           (.moveTo cr x1 y)
@@ -29,10 +29,10 @@
   (.stroke cr))
 
 (defn Cava [_]
-  #jsx [:box {:name :cava
+  #jsx [:box {:name       :cava
               :cssClasses [:island]
-              :vertical true}
+              :vertical   true}
         [DrawingArea {:height 80
                       :onDraw render
-                      :setup (fn [widget] (.subscribe (bind cava :values)
-                                                      #(widget.queue_draw)))}]])
+                      :setup  (fn [widget] (.subscribe (bind cava :values)
+                                                       #(widget.queue_draw)))}]])

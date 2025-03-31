@@ -2,52 +2,17 @@
 $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 
+// MARK: Bar
+
 #bar {
 	background: transparent;
 	color: $fg-color;
 	font-family: "DepartureMono Nerd Font Mono";
 
-	#root {
-		margin: 20px;
-		margin-right: 3px;
-	}
-
-	.islands {
-		> * {
-			margin-top: 1rem;
-		}
-		> *:nth-child(1) {
-			margin-top: 0;
-		}
-	}
-
-	.island {
-		min-height: 2.6rem;
-		border-radius: 100px;
-		background-color: $bg-color;
-	}
-
-	#system > label {
-		font-size: 2rem;
-	}
-
-	#workspaces > button {
-		padding-top: 0;
-		padding-bottom: 0;
-		border-radius: 0;
-
-		&:nth-child(1) {
-			padding-top: 0.6rem;
-			border-radius: 100px 100px 0 0;
-		}
-		&:nth-last-child(1) {
-			padding-bottom: 0.6rem;
-			border-radius: 0 0 100px 100px;
-		}
-
-		> label {
-			font-size: 1.4rem;
-		}
+	* {
+		transition-property: margin, width, height, background-color, background-image;
+		transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+		transition-duration: 300ms;
 	}
 
 	button {
@@ -57,5 +22,59 @@ $bg-color: #{"@theme_bg_color"};
 		&:not(:hover):not(:checked) {
 			background-color: transparent;
 		}
+	}
+
+	.islands {
+		> * {
+			margin-top: 10px;
+		}
+		> *:nth-child(1) {
+			margin-top: 0;
+		}
+	}
+
+	.island {
+		min-height: 37px;
+		border-radius: 100px;
+		background-color: $bg-color;
+	}
+
+	#root {
+		margin: 20px;
+		margin-right: 3px;
+	}
+
+	// MARK: Top
+
+	#workspaces > button {
+		padding-top: 0;
+		padding-bottom: 0;
+		border-radius: 0;
+
+		&:nth-child(1) {
+			padding-top: 6px;
+			border-radius: 100px 100px 0 0;
+		}
+		&:nth-last-child(1) {
+			padding-bottom: 6px;
+			border-radius: 0 0 100px 100px;
+		}
+
+		> label {
+			font-size: 1.4rem;
+		}
+	}
+
+	// MARK: Center
+
+	#mpris > box > label {
+		margin-top: 6px;
+		margin-bottom: 10px;
+	}
+
+	// MARK: Bottom
+
+	#system > label {
+		font-size: 2rem;
 	}
 }
