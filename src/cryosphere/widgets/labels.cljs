@@ -28,7 +28,7 @@
 (defn RotatedLabel
   "A pseudo-vertical WrappedLabel with a max width of 1 and a horizontal gravity"
   [{:keys [label gravity attributes] :or {gravity Pango/Gravity.EAST} :as opts}]
-  (let [opts' (dissoc opts :label :gravity :attributes)
+  (let [opts'       (dissoc opts :label :gravity :attributes)
         attributes' (doto (if attributes (.copy attributes) (Pango/AttrList.new))
                       (.insert (Pango/attr_gravity_new gravity))
                       (.insert (Pango/attr_gravity_hint_new Pango/GravityHint.STRONG))
