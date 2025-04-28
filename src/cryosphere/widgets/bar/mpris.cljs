@@ -22,16 +22,15 @@
 
 
 (defn- apply_gradient [[from to]]
-  (print "Applying gradient" from to) ;; TODO
-  (App.apply_css
-   (str "#mpris { background-image: linear-gradient(-135deg, " from " 80px, " to "); }")))
+  (when (and from to)
+    (App.apply_css
+     (str "#mpris { background-image: linear-gradient(-135deg, " from " 80px, " to "); }"))))
 
 (defn Mpris [_]
   #jsx [:box {:name       :mpris
               :cssClasses [:island]
               :visible    (bind player* some?)
-              :vertical   true
-              :setup      #(.subscribe gradient* apply_gradient)}
+              :vertical   true}
         [Cava]
         [:box
          [RotatedLabel {:label (bind title*)
@@ -40,4 +39,5 @@
                         :valign Gtk/Align.START}]]])
 
 
+(.subscribe gradient* apply_gradient)
 (apply_gradient (.get gradient*))

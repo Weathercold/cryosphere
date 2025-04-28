@@ -1,6 +1,8 @@
 .cache/
+.calva/
 .direnv/
 .sass-cache/
+.venv/
 __pycache__/
 @girs/
 bin/
